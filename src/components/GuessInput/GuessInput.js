@@ -10,7 +10,6 @@ function GuessInput() {
 
   function handleSubmit(event) {
     event.preventDefault();
-    // const guess = event.target;
     console.log({ guess });
     setGuess("");
   }
@@ -23,7 +22,11 @@ function GuessInput() {
         value={guess}
         onChange={handleChange}
         type="text"
+        required
+        minLength={5}
         maxLength={5}
+        pattern="[a-zA-Z]{5}"
+        title="5 letters only"
       />
     </form>
   );
