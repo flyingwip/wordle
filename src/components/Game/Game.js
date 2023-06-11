@@ -19,7 +19,8 @@ function Game() {
   function handleSubmit(event) {
     event.preventDefault();
     // const guess = event.target;
-    // console.log({ guess });
+    console.log({ guess });
+    setGuess("");
   }
 
   return (
