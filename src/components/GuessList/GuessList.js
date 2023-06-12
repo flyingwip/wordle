@@ -1,14 +1,25 @@
 import React from "react";
+import Guess from "../Guess/Guess";
+import { range } from "../../utils";
+import { NUM_OF_GUESSES_ALLOWED } from "../../constants";
 
 function GuessList({ wordList }) {
+  const guessedWords = wordList.map(({ value, id }) => {
+    return { value: value, id: `${value}-${Math.random()}` };
+  });
+
+  const emptyWords = range(0, NUM_OF_GUESSES_ALLOWED - wordList.length).map(
+    (index) => {
+      return { value: "", id: `${Math.random()}` };
+    }
+  );
+
+  const grid = [...guessedWords, ...emptyWords];
+
   return (
     <div className="guess-results">
-      {wordList.map(({ value, id }, index) => {
-        return (
-          <p key={id} className="guess">
-            {value}
-          </p>
-        );
+      {grid.map(({ value, id }, index) => {
+        return <Guess key={id} word={value} />;
       })}
     </div>
   );

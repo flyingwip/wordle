@@ -10,10 +10,9 @@ function GuessInput({ handleGuess }) {
 
   function handleSubmit(event) {
     event.preventDefault();
-    console.log({ guess });
     // list state up to parent
     handleGuess(guess);
-
+    // clear input
     setGuess("");
   }
 
