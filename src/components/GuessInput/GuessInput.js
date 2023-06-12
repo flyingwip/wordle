@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function GuessInput() {
+function GuessInput({ setGuessedWord }) {
   const [guess, setGuess] = useState("");
 
   function handleChange(event) {
@@ -11,6 +11,9 @@ function GuessInput() {
   function handleSubmit(event) {
     event.preventDefault();
     console.log({ guess });
+    // list state up to parent
+    setGuessedWord(guess);
+
     setGuess("");
   }
 
