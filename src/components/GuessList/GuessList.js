@@ -1,22 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 
-function GuessList({ guessedWord }) {
-  const [wordList, setWordList] = useState([]);
-
-  // console.log({ guessedWord });
-
-  useEffect(() => {
-    if (guessedWord) {
-      setWordList((wordList) => [...wordList, guessedWord]);
-    }
-  }, [guessedWord]);
-
+function GuessList({ wordList }) {
   return (
-    <ol className="guess-results">
-      {wordList.map((word, index) => {
-        return <li key={index}>{word}</li>;
+    <div className="guess-results">
+      {wordList.map(({ value, id }, index) => {
+        return (
+          <p key={id} className="guess">
+            {value}
+          </p>
+        );
       })}
-    </ol>
+    </div>
   );
 }
 

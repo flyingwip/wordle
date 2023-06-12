@@ -11,12 +11,22 @@ const answer = sample(WORDS);
 console.info({ answer });
 
 function Game() {
-  const [guessedWord, setGuessedWord] = useState("");
+  // const [guessedWord, setGuessedWord] = useState("");
+  const [wordList, setWordList] = useState([]);
+
+  function handleGuess(guess) {
+    const nextGues = {
+      value: guess,
+      id: `${guess}-${Math.random()}`,
+    };
+
+    setWordList([...wordList, nextGues]);
+  }
 
   return (
     <>
-      <GuessList guessedWord={guessedWord} />
-      <GuessInput setGuessedWord={setGuessedWord} />
+      <GuessList wordList={wordList} />
+      <GuessInput handleGuess={handleGuess} />
     </>
   );
 }
