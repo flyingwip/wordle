@@ -1,6 +1,6 @@
 import React from "react";
 
-function Guess({ word }) {
+function Guess({ word, checkResult }) {
   let letters = new Array(5).fill("");
 
   if (word) {
@@ -9,11 +9,16 @@ function Guess({ word }) {
 
   return (
     <p className="guess">
-      {letters.map((letter) => (
-        <span key={`${letter}-${Math.random()}`} className="cell">
-          {letter}
-        </span>
-      ))}
+      {letters.map((letter, index) => {
+        return (
+          <span
+            key={`${letter}-${Math.random()}`}
+            className={`cell ${checkResult[index].status}`}
+          >
+            {letter}
+          </span>
+        );
+      })}
     </p>
   );
 }

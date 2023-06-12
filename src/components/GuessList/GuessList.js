@@ -4,13 +4,17 @@ import { range } from "../../utils";
 import { NUM_OF_GUESSES_ALLOWED } from "../../constants";
 
 function GuessList({ wordList }) {
-  const guessedWords = wordList.map(({ value, id }) => {
-    return { value: value, id: `${value}-${Math.random()}` };
+  const guessedWords = wordList.map(({ value, checkResult }) => {
+    return { value: value, id: `${value}-${Math.random()}`, checkResult };
   });
 
   const emptyWords = range(0, NUM_OF_GUESSES_ALLOWED - wordList.length).map(
     (index) => {
-      return { value: "", id: `${Math.random()}` };
+      return {
+        value: "",
+        id: `${Math.random()}`,
+        checkResult: new Array(5).fill({}),
+      };
     }
   );
 
@@ -18,8 +22,8 @@ function GuessList({ wordList }) {
 
   return (
     <div className="guess-results">
-      {grid.map(({ value, id }, index) => {
-        return <Guess key={id} word={value} />;
+      {grid.map(({ value, id, checkResult }, index) => {
+        return <Guess key={id} word={value} checkResult={checkResult} />;
       })}
     </div>
   );
