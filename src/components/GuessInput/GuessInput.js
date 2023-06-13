@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function GuessInput({ handleGuess }) {
+function GuessInput({ handleGuess, gameState }) {
   const [guess, setGuess] = useState("");
 
   function handleChange(event) {
@@ -17,11 +17,16 @@ function GuessInput({ handleGuess }) {
   }
 
   return (
-    <form className="guess-input-wrapper" onSubmit={handleSubmit}>
+    <form
+      style={{ opacity: gameState > 0 ? 0 : 1 }}
+      className="guess-input-wrapper"
+      onSubmit={handleSubmit}
+    >
       <label htmlFor="guess-input">Enter guess:</label>
       <input
         id="guess-input"
         value={guess}
+        disabled={gameState > 0 ? true : false}
         onChange={handleChange}
         type="text"
         required

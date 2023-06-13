@@ -28,9 +28,10 @@ function Game() {
       checkResult: checkResult,
     };
 
-    setWordList([...wordList, nextGues]);
-    if (wordList.length < NUM_OF_GUESSES_ALLOWED - 1) {
-      if (checkResult.every((result) => result.status === "correct")) {
+    const newWordList = [...wordList, nextGues];
+    setWordList(newWordList);
+    if (newWordList.length < NUM_OF_GUESSES_ALLOWED) {
+      if (answer.toUpperCase() === guess) {
         setGameState(1);
       }
     } else {
@@ -41,8 +42,14 @@ function Game() {
   return (
     <>
       <GuessList wordList={wordList} />
-      {gameState === 0 && <GuessInput handleGuess={handleGuess} />}
-      {gameState > 0 && <Banner result={gameState} answer={answer} />}
+      <GuessInput gameState={gameState} handleGuess={handleGuess} />
+      {gameState > 0 && (
+        <Banner
+          result={gameState}
+          answer={answer}
+          amountOfGuesses={wordList.length}
+        />
+      )}
     </>
   );
 }
